@@ -1,4 +1,6 @@
-# Update of GPLv3 KitchenTimer project, found on F-Droid
+# GPLv3 KitchenTimer
+
+Update of GPLv3 KitchenTimer project, found on F-Droid
 
 original source at https://code.google.com/p/kitchentimer/
 
