@@ -33,6 +33,7 @@ import com.leinardi.kitchentimer.customviews.NumberPicker;
 import com.leinardi.kitchentimer.misc.Changelog;
 import com.leinardi.kitchentimer.misc.Constants;
 import com.leinardi.kitchentimer.misc.Eula;
+import com.leinardi.kitchentimer.misc.Log;
 import com.leinardi.kitchentimer.utils.Utils;
 
 import android.R.bool;
@@ -124,7 +125,7 @@ public class MainActivity extends Activity {
 
     ColorStateList timerDefaultColor;
 
-    private Timer mTimerUpdateTimer = new Timer();
+    private Timer mTimerUpdateTimer;
 
     private boolean mTimersUpdateThreadIsStopped = true;
 
@@ -139,6 +140,7 @@ public class MainActivity extends Activity {
                     break;
 
                 case MESSAGE_RESET_TIMER:
+
                     int timer = msg.arg1;
                     if (mPrefs.getBoolean(getString(R.string.pref_clear_timer_label_key), false)) {
                         tvTimerLabel[timer].setText(timerDefaultName[timer]);
@@ -446,7 +448,7 @@ public class MainActivity extends Activity {
 
         Message m = mHandler.obtainMessage(state ? MESSAGE_DISPLAY_TIMER_AS_RUNNING
                 : MESSAGE_DISPLAY_TIMER_AS_NOT_RUNNING, timer, 0);
-        
+
         mHandler.sendMessage(m);
 
         setAlarmState(state, timer);
@@ -583,37 +585,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    private final TimerTask mTimerUpdateTimerTask = new TimerTask() {
-
-        @Override
-        public void run() {
-
-            for (int timer = 0; timer < Constants.NUM_TIMERS; timer++) {
-                if (timerIsRunning[timer]) {
-
-                    long remainingSeconds = timerSeconds[timer]
-                            - (SystemClock.elapsedRealtime() - timerStartTime[timer]) / 1000;
-
-                    String newTime = Utils.formatTime(Math.max(remainingSeconds, 0L), timer);
-
-                    Message m = mHandler
-                            .obtainMessage(MESSAGE_UPDATE_TIMER_TIME, timer, 0, newTime);
-                    mHandler.sendMessage(m);
-
-                    if (remainingSeconds <= 0) {
-
-                        setTimerState(false, timer);
-                        Message resetMessage = mHandler.obtainMessage(MESSAGE_RESET_TIMER, timer);
-                        mHandler.sendMessage(resetMessage);
-
-                    }
-
-                }
-            }
-
-        }
-    };
-
     @Override
     protected Dialog onCreateDialog(int id) {
 
@@ -723,7 +694,8 @@ public class MainActivity extends Activity {
 
     public void startTimerUpdateThread() {
         mTimersUpdateThreadIsStopped = false;
-        mTimerUpdateTimer.scheduleAtFixedRate(mTimerUpdateTimerTask, 0, 1000);
+        mTimerUpdateTimer = new Timer();
+        mTimerUpdateTimer.schedule(new UpdateTimerTask(), 0, 1000);
     }
 
     public void stopTimerUpdateThread() {
@@ -740,6 +712,37 @@ public class MainActivity extends Activity {
         }
 
         return true;
+    }
+
+    private final class UpdateTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            for (int timer = 0; timer < Constants.NUM_TIMERS; timer++) {
+                if (timerIsRunning[timer]) {
+
+                    long remainingSeconds = timerSeconds[timer]
+                            - (SystemClock.elapsedRealtime() - timerStartTime[timer]) / 1000;
+
+                    String newTime = Utils.formatTime(Math.max(remainingSeconds, 0L), timer);
+
+                    Message m = mHandler
+                            .obtainMessage(MESSAGE_UPDATE_TIMER_TIME, timer, 0, newTime);
+                    mHandler.sendMessage(m);
+
+                    if (remainingSeconds <= 0) {
+
+                        setTimerState(false, timer);
+                        Message resetMessage = mHandler.obtainMessage(MESSAGE_RESET_TIMER, timer);
+                        mHandler.sendMessage(resetMessage);
+
+                    }
+
+                }
+            }
+
+        }
     }
 
 }
