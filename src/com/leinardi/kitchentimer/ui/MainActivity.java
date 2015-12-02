@@ -76,9 +76,13 @@ public class MainActivity extends Activity {
             0, 1, 2
     };
 
-    protected static final int UPDATE_TIMER_TIME = 0;
+    protected static final int MESSAGE_UPDATE_TIMER_TIME = 0;
 
-    protected static final int RESET_TIMER = 1;
+    protected static final int MESSAGE_RESET_TIMER = 1;
+
+    private static final int MESSAGE_DISPLAY_TIMER_AS_RUNNING = 2;
+
+    private static final int MESSAGE_DISPLAY_TIMER_AS_NOT_RUNNING = 3;
 
     private static final int DIALOG_EXIT_QUESTION = 0;
 
@@ -130,11 +134,11 @@ public class MainActivity extends Activity {
         public void handleMessage(Message msg) {
 
             switch (msg.what) {
-                case UPDATE_TIMER_TIME:
+                case MESSAGE_UPDATE_TIMER_TIME:
                     tvTimer[msg.arg1].setText((String) msg.obj);
                     break;
 
-                case RESET_TIMER:
+                case MESSAGE_RESET_TIMER:
                     int timer = msg.arg1;
                     if (mPrefs.getBoolean(getString(R.string.pref_clear_timer_label_key), false)) {
                         tvTimerLabel[timer].setText(timerDefaultName[timer]);
@@ -145,6 +149,15 @@ public class MainActivity extends Activity {
                     tvTimer[timer].setShadowLayer(Utils.dp2px(7, getApplicationContext()), 0f, 0f,
                             getResources().getColor(R.color.indian_red_1));
                     break;
+
+                case MESSAGE_DISPLAY_TIMER_AS_RUNNING:
+                    displayTimerAsRunning(msg.arg1);
+                    break;
+
+                case MESSAGE_DISPLAY_TIMER_AS_NOT_RUNNING:
+                    displayTimerAsNotRunning(msg.arg1);
+                    break;
+
                 default:
                     break;
             }
@@ -431,11 +444,10 @@ public class MainActivity extends Activity {
     private void setTimerState(boolean state, int timer) {
         timerIsRunning[timer] = state;
 
-        if (state) {
-            displayTimerAsRunning(timer);
-        } else {
-            displayTimerAsNotRunning(timer);
-        }
+        Message m = mHandler.obtainMessage(state ? MESSAGE_DISPLAY_TIMER_AS_RUNNING
+                : MESSAGE_DISPLAY_TIMER_AS_NOT_RUNNING, timer, 0);
+        
+        mHandler.sendMessage(m);
 
         setAlarmState(state, timer);
         sendTimerIsRunningNotification(state, timer);
@@ -584,13 +596,14 @@ public class MainActivity extends Activity {
 
                     String newTime = Utils.formatTime(Math.max(remainingSeconds, 0L), timer);
 
-                    Message m = mHandler.obtainMessage(UPDATE_TIMER_TIME, timer, 0, newTime);
+                    Message m = mHandler
+                            .obtainMessage(MESSAGE_UPDATE_TIMER_TIME, timer, 0, newTime);
                     mHandler.sendMessage(m);
 
                     if (remainingSeconds <= 0) {
 
                         setTimerState(false, timer);
-                        Message resetMessage = mHandler.obtainMessage(RESET_TIMER, timer);
+                        Message resetMessage = mHandler.obtainMessage(MESSAGE_RESET_TIMER, timer);
                         mHandler.sendMessage(resetMessage);
 
                     }
