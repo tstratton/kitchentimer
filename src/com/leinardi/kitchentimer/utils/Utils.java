@@ -47,6 +47,13 @@ import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public class Utils {
+    
+    private static SimpleDateFormat sdf;
+    
+    static{
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+    }
 
 	/**
 	 * 
@@ -56,8 +63,6 @@ public class Utils {
 	 */
 	public static String formatTime(long totalSeconds, int timer) {
 		if (timer == 0) {
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-			sdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
 			return sdf.format(new Date(totalSeconds * 1000));
 		} else {
 
