@@ -40,8 +40,6 @@
                 android:maxLines="1"
                 android:paddingLeft="6dp"
                 android:paddingRight="6dp"
-                android:shadowColor="@color/white"
-                android:shadowRadius="3"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
@@ -82,8 +80,6 @@
                     android:gravity="left"
                     android:maxLines="1"
                     android:paddingRight="10dp"
-                    android:shadowColor="@color/white"
-                    android:shadowRadius="3"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -118,8 +114,6 @@
                     android:gravity="right"
                     android:maxLines="1"
                     android:paddingLeft="10dp"
-                    android:shadowColor="@color/white"
-                    android:shadowRadius="3"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
