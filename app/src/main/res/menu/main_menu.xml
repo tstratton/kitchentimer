@@ -19,10 +19,6 @@
 		android:title="@string/info"
 		android:icon="@drawable/ic_menu_info_details" />
 	<item
-		android:id="@+id/menu_donate"
-		android:title="@string/donate"
-		android:icon="@drawable/donate" />
-	<item
 		android:id="@+id/menu_presets"
 		android:title="@string/presets"
 		android:icon="@drawable/ic_menu_agenda" />

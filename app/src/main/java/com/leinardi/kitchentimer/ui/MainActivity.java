@@ -547,9 +547,6 @@ public class MainActivity extends Activity {
                 intent = new Intent(this, InfoActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.menu_donate:
-                showDialog(DIALOG_DONATE);
-                return true;
             case R.id.menu_presets:
                 intent = new Intent(this, PresetsActivity.class);
                 startActivityForResult(intent, Constants.REQUEST_PRESETS);
