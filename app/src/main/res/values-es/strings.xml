@@ -47,7 +47,7 @@
 <string name="pref_info_version_error">Imposible determinar la versión</string>
 <string name="pref_donate">Ayuda a Kitchen Timer</string>
 <string name="pref_donate_summary">Ayúdanos a mantenerlo gratis y sin publicidad</string>
-<string name="pref_report_a_bug">Reportar un error</string>
+<string name="pref_faq">Reportar un error</string>
 <string name="pref_report_a_bug_summary">Enviar un problema al centro de ayuda</string>
 <string name="pref_display_changelog_summary">Mostrar los cambios de las actualizaciones</string>
 <string name="pref_display_eula_summary">Mostrar la licencia de la aplicación</string>

@@ -25,15 +25,12 @@ import com.leinardi.kitchentimer.misc.Log;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.Preference.OnPreferenceClickListener;
 
 public class ConfigActivity extends PreferenceActivity {
-	private final String REPORT_A_BUG_URL = "http://code.google.com/p/kitchentimer/issues/list";
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,15 +47,15 @@ public class ConfigActivity extends PreferenceActivity {
 		}
 
 		findPreference(getString(R.string.pref_info_version_key)).setSummary(version);
-		Preference reportABug = findPreference(getString(R.string.pref_report_a_bug_key));
-		reportABug.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			
+		Preference openFaq = findPreference(getString(R.string.pref_faq_key));
+		openFaq.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(REPORT_A_BUG_URL));
-				startActivity(browserIntent);
+				Intent intent = new Intent(ConfigActivity.this, InfoActivity.class);
+				startActivity(intent);
 				return false;
 			}
 		});
-	}	
+	}
 }

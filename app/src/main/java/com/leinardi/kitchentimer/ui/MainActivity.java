@@ -87,8 +87,6 @@ public class MainActivity extends Activity {
 
     private static final int DIALOG_EXIT_QUESTION = 0;
 
-    private static final int DIALOG_DONATE = 1;
-
     private static final int DIALOG_SET_TIMER_NAME = 2;
 
     private PowerManager.WakeLock mWakeLock = null;
@@ -543,10 +541,6 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
-            case R.id.menu_info:
-                intent = new Intent(this, InfoActivity.class);
-                startActivity(intent);
-                return true;
             case R.id.menu_presets:
                 intent = new Intent(this, PresetsActivity.class);
                 startActivityForResult(intent, Constants.REQUEST_PRESETS);
@@ -609,22 +603,6 @@ public class MainActivity extends Activity {
                         finish();
                     }
                 });
-
-                return builder.create();
-
-            case DIALOG_DONATE:
-                builder = new AlertDialog.Builder(this);
-
-                builder.setTitle(R.string.pref_donate);
-                builder.setMessage(R.string.donate_message);
-
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        Utils.donate(getApplicationContext());
-                    }
-                });
-
-                builder.setNegativeButton(R.string.no, null);
 
                 return builder.create();
 

@@ -16,42 +16,6 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res/com.leinardi.kitchentimer">
 	<PreferenceCategory
-		android:title="@string/info">
-		<Preference
-			android:key="@string/pref_info_version_key"
-			style="?android:preferenceInformationStyle"
-			android:title="@string/pref_info_version" />
-		<com.leinardi.kitchentimer.customviews.DonateDialogPreference
-			app:fileName="@string/changelog_filename"
-			android:key="@string/pref_donate_key"
-			android:title="@string/pref_donate"
-			android:summary="@string/pref_donate_summary"
-			android:dialogTitle="@string/pref_donate"
-			android:dialogMessage="@string/donate_message"
-			android:positiveButtonText="@string/yes" 
-			android:negativeButtonText="@string/no"/>
-		<Preference
-			android:key="@string/pref_report_a_bug_key"
-			android:title="@string/pref_report_a_bug"
-			android:summary="@string/pref_report_a_bug_summary" />
-		<com.leinardi.kitchentimer.customviews.MyDialogPreference
-			app:fileName="@string/changelog_filename"
-			android:key="@string/pref_changelog_key"
-			android:title="@string/changelog_title"
-			android:summary="@string/pref_display_changelog_summary"
-			android:dialogIcon="@drawable/ic_dialog_info"
-			android:dialogTitle="@string/changelog_title"
-			android:negativeButtonText="@null" />
-		<com.leinardi.kitchentimer.customviews.MyDialogPreference
-			app:fileName="@string/eula_filename"
-			android:key="@string/pref_eula_key"
-			android:title="@string/eula_title"
-			android:summary="@string/pref_display_eula_summary"
-			android:dialogIcon="@drawable/ic_dialog_info"
-			android:dialogTitle="@string/eula_title"
-			android:negativeButtonText="@null" />
-	</PreferenceCategory>
-	<PreferenceCategory
 		android:title="@string/pref_display_settings">
 		<CheckBoxPreference
 			android:key="@string/pref_show_tips_key"
@@ -163,6 +127,34 @@
 			android:entries="@array/pref_notification_vibrate_pattern_entries"
 			android:entryValues="@array/pref_notification_vibrate_pattern_values"
 			android:dialogTitle="@string/pref_notification_vibrate_pattern_dialogtitle" />
+	</PreferenceCategory>
+	<PreferenceCategory
+		android:title="@string/info">
+		<Preference
+			android:key="@string/pref_info_version_key"
+			style="?android:preferenceInformationStyle"
+			android:enabled="false"
+			android:selectable="false"
+			android:title="@string/pref_info_version" />
+		<Preference
+			android:key="@string/pref_faq_key"
+			android:title="@string/pref_faq" />
+		<com.leinardi.kitchentimer.customviews.MyDialogPreference
+			app:fileName="@string/changelog_filename"
+			android:key="@string/pref_changelog_key"
+			android:title="@string/changelog_title"
+			android:summary="@string/pref_display_changelog_summary"
+			android:dialogIcon="@drawable/ic_dialog_info"
+			android:dialogTitle="@string/changelog_title"
+			android:negativeButtonText="@null" />
+		<com.leinardi.kitchentimer.customviews.MyDialogPreference
+			app:fileName="@string/eula_filename"
+			android:key="@string/pref_eula_key"
+			android:title="@string/eula_title"
+			android:summary="@string/pref_display_eula_summary"
+			android:dialogIcon="@drawable/ic_dialog_info"
+			android:dialogTitle="@string/eula_title"
+			android:negativeButtonText="@null" />
 	</PreferenceCategory>
 </PreferenceScreen>
 

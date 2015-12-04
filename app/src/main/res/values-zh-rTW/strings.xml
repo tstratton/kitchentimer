@@ -119,7 +119,7 @@
 	<string name="pref_notification_vibrate_pattern_multiple_long">多次長震動</string>
 	<string name="pref_info_version">版本</string>
 	<string name="pref_info_version_error">無法確定版本</string>
-	<string name="pref_report_a_bug">報告錯誤</string>
+	<string name="pref_faq">報告錯誤</string>
 	<string name="pref_report_a_bug_summary">提交一個新的問題給問題追蹤器</string>
 	<string name="pref_display_changelog_summary">顯示程式更新日誌</string>
 	<string name="pref_display_eula_summary">顯示程式許可協議</string>

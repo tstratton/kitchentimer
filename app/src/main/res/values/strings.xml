@@ -120,9 +120,7 @@
 	<string
 		name="pref_donate_summary">Help us to keep it free and without ads</string>
 	<string
-		name="pref_report_a_bug">Report a Bug</string>
-	<string
-		name="pref_report_a_bug_summary">Submit a new issue to the issue tracker</string>
+		name="pref_faq">FAQ</string>
 	<string
 		name="pref_display_changelog_summary">Display application changelog</string>
 	<string
